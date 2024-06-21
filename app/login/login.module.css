@@ -1,0 +1,21 @@
+/* app/login/login.module.css */
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-image {
+  background-image: url("/path/to/your/image.jpg"); /* Ganti dengan path gambar Anda */
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
