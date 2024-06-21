@@ -27,7 +27,7 @@ const LoginPage = () => {
         password,
       });
       // console.log(res.data);
-      Cookies.set("token", res.data, { expires: 1 / 24 / 60 });
+      Cookies.set("token", res.data, { expires: 1 / 24 });
       push("/");
     } catch (error: any) {
       setError(error.response.data.message);
