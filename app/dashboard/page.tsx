@@ -18,6 +18,15 @@ export default function Dashboard() {
         const res = await axios.get(url, { headers: { token } });
         // console.log(res.data);
         setUser(res.data);
+        if (res.data.role === "teacher") {
+          push("/dashboard/teacher");
+        }
+        if (res.data.role === "parent") {
+          push("/dashboard/parent");
+        }
+        if (res.data.role === "student") {
+          push("/dashboard/student");
+        }
       } catch (error) {
         push("/login");
       }
