@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import "../style/style.css";
 import styles from "../style/fileUpload.module.css";
 import Cookies from "js-cookie";
 
@@ -62,16 +61,12 @@ const FileUploadForm = () => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", selectedFile);
-
-      const res = await axios.post(
-        "https://seb.nola.sch.id/upload.php",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const urlSebPhp: any = process.env.NEXT_PUBLIC_API_SEB_PHP;
+      const res = await axios.post(urlSebPhp, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (res.data.status === "success") {
         setResponseMessage(`File uploaded successfully`);
@@ -92,12 +87,10 @@ const FileUploadForm = () => {
           const teacher = teacherData.data.name;
 
           const data = { filename, url, grade, subject, assessment, teacher };
-
-          const uploadToDB = await axios.post(
-            `https://api.nola.sch.id/api/seb`,
-            data,
-            { headers: { token } }
-          );
+          const urlSeb: any = process.env.NEXT_PUBLIC_API_SEB;
+          const uploadToDB = await axios.post(urlSeb, data, {
+            headers: { token },
+          });
           setUploadState(false);
           setLoading(false);
           window.location.href = "/";
