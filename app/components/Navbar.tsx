@@ -82,20 +82,6 @@ const Navbar = () => {
               >
                 <FaRegUser />
                 <span className="ml-1">{user?.username}</span>
-
-                {/* <svg
-                  className="h-5 w-5 inline-block ml-1 -mt-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 12a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg> */}
               </button>
               {isOpenMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">

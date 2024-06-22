@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import FileUploadForm from "@/app/components/UploadSebFile";
+import SmallResponsiveCard from "@/app/components/CardAssessment";
 
 const TeacherPage = () => {
   const session: any = Cookies.get("token");
@@ -24,6 +25,21 @@ const TeacherPage = () => {
   }, []);
   return (
     <>
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <SmallResponsiveCard
+            data={{
+              title: "Upload",
+              link: "/dashboard/teacher/upload-seb-file",
+            }}
+          />
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <SmallResponsiveCard
+            data={{ title: "SEB Files", link: "/dashboard/teacher/seb-files" }}
+          />
+        </div>
+      </div>
       <FileUploadForm />
     </>
   );
