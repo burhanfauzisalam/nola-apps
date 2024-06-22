@@ -6,7 +6,7 @@ import axios from "axios";
 
 const TeacherPage = () => {
   const session: any = Cookies.get("token");
-  const sessionParse = JSON.parse(session);
+  const sessionParse = JSON.parse(session ? session : null);
   const token = sessionParse.token;
   const [user, setUser]: any = useState();
   useEffect(() => {
