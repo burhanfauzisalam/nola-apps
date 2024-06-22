@@ -25,24 +25,33 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="hidden md:flex space-x-4 items-center">
-            <Link href="/" className="text-gray-900 hover:text-gray-700">
+            <Link
+              href="/"
+              className="text-gray-900 hover:text-gray-700 no-underline"
+            >
               Ho
             </Link>
-            <Link href="/about" className="text-gray-900 hover:text-gray-700">
+            <Link
+              href="/about"
+              className="text-gray-900 hover:text-gray-700 no-underline"
+            >
               About
             </Link>
             <Link
               href="/services"
-              className="text-gray-900 hover:text-gray-700"
+              className="text-gray-900 hover:text-gray-700 no-underline"
             >
               Services
             </Link>
-            <Link href="/contact" className="text-gray-900 hover:text-gray-700">
+            <Link
+              href="/contact"
+              className="text-gray-900 hover:text-gray-700 no-underline"
+            >
               Contact
             </Link>
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700"
+              className="bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 no-underline"
             >
               Logout
             </button>
@@ -89,24 +98,27 @@ const Navbar = () => {
 
       <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 ml-5 mb-2">
-          <Link href="/" className="block text-gray-900 hover:text-gray-700">
+          <Link
+            href="/"
+            className="block text-gray-900 hover:text-gray-700 no-underline"
+          >
             Home
           </Link>
           <Link
             href="/about"
-            className="block text-gray-900 hover:text-gray-700"
+            className="block text-gray-900 hover:text-gray-700 no-underline"
           >
             About
           </Link>
           <Link
             href="/services"
-            className="block text-gray-900 hover:text-gray-700"
+            className="block text-gray-900 hover:text-gray-700 no-underline"
           >
             Services
           </Link>
           <Link
             href="/contact"
-            className="block text-gray-900 hover:text-gray-700"
+            className="block text-gray-900 hover:text-gray-700 no-underline"
           >
             Contact
           </Link>
