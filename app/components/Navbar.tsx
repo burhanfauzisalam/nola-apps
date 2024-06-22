@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const session: any = Cookies.get("token");
   const sessionParse = JSON.parse(session ? session : null);
-  const token = sessionParse.token;
+  const token = sessionParse?.token;
   const [user, setUser]: any = useState();
   useEffect(() => {
     const getUser = async () => {
