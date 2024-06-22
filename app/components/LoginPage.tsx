@@ -38,7 +38,7 @@ const LoginPage: React.FC<data> = ({ data }) => {
           },
         }
       );
-      Cookies.set("token", res.data, { expires: 1 / 24 });
+      Cookies.set("token", JSON.stringify(res.data), { expires: 1 / 24 });
       push("/");
     } catch (error: any) {
       if (error.response) {

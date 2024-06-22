@@ -1,10 +1,9 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const TeacherPage = () => {
+const ParentPage = () => {
   const session: any = Cookies.get("token");
   const sessionParse = JSON.parse(session);
   const token = sessionParse.token;
@@ -12,7 +11,7 @@ const TeacherPage = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const url: any = process.env.NEXT_PUBLIC_API_TEACHER;
+        const url: any = process.env.NEXT_PUBLIC_API_PARENT;
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
@@ -23,9 +22,9 @@ const TeacherPage = () => {
   }, []);
   return (
     <div className="mt-10">
-      <h1>{user?.name}</h1>
+      <h1>{user?.username}</h1>
     </div>
   );
 };
 
-export default TeacherPage;
+export default ParentPage;

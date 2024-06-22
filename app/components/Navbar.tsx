@@ -1,18 +1,42 @@
 "use client"; // components/Navbar.js atau components/Navbar.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import axios from "axios";
+import { FaRegUser } from "react-icons/fa";
+import { ImPencil2 } from "react-icons/im";
+import { BsJournalBookmark } from "react-icons/bs";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { push } = useRouter();
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const session: any = Cookies.get("token");
+  const sessionParse = JSON.parse(session);
+  const token = sessionParse.token;
+  const [user, setUser]: any = useState();
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const url: any =
+          sessionParse.role === "teacher"
+            ? process.env.NEXT_PUBLIC_API_TEACHER
+            : process.env.NEXT_PUBLIC_API_PARENT;
+        const res = await axios.get(url, { headers: { token } });
+        setUser(res.data);
+      } catch (error: any) {
+        console.log(error.response.message);
+      }
+    };
+    getUser();
+  }, []);
 
   const handleLogout = () => {
-    // Logika logout Anda di sini (misalnya menghapus token)
     Cookies.remove("token");
-    // push("/");
     window.location.reload();
+  };
+  const toggleDropdown = () => {
+    setIsOpenMenu(!isOpenMenu);
   };
 
   return (
@@ -25,36 +49,71 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="hidden md:flex space-x-4 items-center">
-            <Link
-              href="/"
-              className="text-gray-900 hover:text-gray-700 no-underline"
-            >
-              Ho
-            </Link>
+            {user?.role === "teacher" ? (
+              <Link
+                href="/"
+                className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
+              >
+                <ImPencil2 />
+                <span className="ml-1">Assessment</span>
+              </Link>
+            ) : user?.role === "parent" ? (
+              <Link
+                href="/"
+                className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
+              >
+                <ImPencil2 />
+                <span className="ml-1">Invoice</span>
+              </Link>
+            ) : (
+              ""
+            )}
             <Link
               href="/about"
-              className="text-gray-900 hover:text-gray-700 no-underline"
+              className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
             >
-              About
+              <BsJournalBookmark />
+              <span className="ml-1">Report</span>
             </Link>
-            <Link
-              href="/services"
-              className="text-gray-900 hover:text-gray-700 no-underline"
-            >
-              Services
-            </Link>
-            <Link
-              href="/contact"
-              className="text-gray-900 hover:text-gray-700 no-underline"
-            >
-              Contact
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-red-700 no-underline"
-            >
-              Logout
-            </button>
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="text-gray-900 hover:text-gray-700 focus:outline-none flex items-center d-flex align-items-center"
+              >
+                <FaRegUser />
+                <span className="ml-1">{user?.username}</span>
+
+                {/* <svg
+                  className="h-5 w-5 inline-block ml-1 -mt-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 12a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                  />
+                </svg> */}
+              </button>
+              {isOpenMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -122,12 +181,45 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white block w-full text-left text-center py-2 rounded-md text-sm font-medium hover:bg-red-700"
-          >
-            Logout
-          </button>
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="text-gray-900 hover:text-gray-700 focus:outline-none flex items-center d-flex align-items-center"
+            >
+              <FaRegUser />
+              <span className="ml-1">{user?.username}</span>
+
+              {/* <svg
+                  className="h-5 w-5 inline-block ml-1 -mt-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 12a2 2 0 100-4 2 2 0 000 4z"
+                    clipRule="evenodd"
+                  />
+                </svg> */}
+            </button>
+            {isOpenMenu && (
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                <Link
+                  href="/profile"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

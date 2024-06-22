@@ -7,8 +7,11 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const { push } = useRouter();
-  const token = Cookies.get("token");
 
+  const session: any = Cookies.get("token");
+  const sessionParse = JSON.parse(session);
+  const token = sessionParse.token;
+  // console.log(sessionParse);
   const [user, setUser]: any = useState();
 
   useEffect(() => {
