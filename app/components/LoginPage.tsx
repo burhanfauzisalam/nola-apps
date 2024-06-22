@@ -19,6 +19,7 @@ const LoginPage: React.FC<data> = ({ data }) => {
   const [loading, isLoading] = useState(false);
   const { push } = useRouter();
 
+  console.log(data.url);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!username && !password) {
@@ -26,15 +27,30 @@ const LoginPage: React.FC<data> = ({ data }) => {
     }
     isLoading(true);
     try {
-      const res = await axios.post(data.url, {
-        username,
-        password,
-      });
-      // console.log(res.data);
+      const url = data.url;
+      const res = await axios.post(
+        url,
+        {
+          username,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       Cookies.set("token", res.data, { expires: 1 / 24 });
       push("/");
     } catch (error: any) {
-      setError(error.response.data.message);
+      if (error.response) {
+        setError(error.response.data.message);
+        console.log(error.response);
+      } else {
+        setError("An unexpected error occurred");
+        console.log("Error", error.message);
+      }
+    } finally {
       isLoading(false);
     }
   };
