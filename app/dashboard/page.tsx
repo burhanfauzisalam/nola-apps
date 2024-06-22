@@ -9,8 +9,8 @@ export default function Dashboard() {
   const { push } = useRouter();
 
   const session: any = Cookies.get("token");
-  const sessionParse = JSON.parse(session);
-  const token = sessionParse.token;
+  const sessionParse = JSON.parse(session ? session : null);
+  const token = sessionParse?.token;
   // console.log(sessionParse);
   const [user, setUser]: any = useState();
 
