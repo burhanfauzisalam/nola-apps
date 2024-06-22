@@ -14,8 +14,8 @@ export default function Dashboard() {
   useEffect(() => {
     const cekToken: any = async () => {
       try {
-        const url: any = process.env.NEXT_PUBLIC_API_TEACHER;
-        const res = await axios.get(url, { headers: { token } });
+        const url: any = process.env.NEXT_PUBLIC_API_DECODE;
+        const res = await axios.post(url, {}, { headers: { token } });
         // console.log(res.data);
         setUser(res.data);
         if (res.data.role === "teacher") {
@@ -33,5 +33,5 @@ export default function Dashboard() {
     };
     cekToken();
   }, []);
-  return <div className="container">{user?.name}</div>;
+  return;
 }
