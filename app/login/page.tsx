@@ -14,6 +14,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     if (!username || !password) {
       setError("Please fill username and password");
       return;
@@ -29,7 +30,6 @@ const LoginPage = () => {
         {
           username,
           password,
-          role: selectedRole, // Include selected role in the request
         },
         {
           headers: {
@@ -107,8 +107,7 @@ const LoginPage = () => {
               onChange={(e) => setSelectedRole(e.target.value)}
             >
               <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="parent">Parent</option>
+              <option value="teacher">Teacher / Parent</option>
             </select>
           </div>
           {loading ? (

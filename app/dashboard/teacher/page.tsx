@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import FileUploadForm from "@/app/components/UploadSebFile";
 
 const TeacherPage = () => {
   const session: any = Cookies.get("token");
@@ -22,9 +23,9 @@ const TeacherPage = () => {
     getUser();
   }, []);
   return (
-    <div className="mt-10">
-      <h1>{user?.name}</h1>
-    </div>
+    <>
+      <FileUploadForm />
+    </>
   );
 };
 
