@@ -4,8 +4,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import styles from "../style/fileUpload.module.css";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const FileUploadForm = () => {
+  const { push } = useRouter();
+
   const [user, setUser] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [responseMessage, setResponseMessage] = useState("");
@@ -93,7 +96,7 @@ const FileUploadForm = () => {
           });
           setUploadState(false);
           setLoading(false);
-          window.location.href = "/";
+          push("/dashboard/teacher/assessment/seb-files");
         } catch (error) {
           console.log(error);
         }

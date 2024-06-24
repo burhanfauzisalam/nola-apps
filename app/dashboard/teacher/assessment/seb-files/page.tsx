@@ -82,7 +82,7 @@ const FileTable = () => {
 
   return (
     data.length > 0 && (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-5">
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
@@ -97,7 +97,10 @@ const FileTable = () => {
             </thead>
             <tbody>
               {data.map((item: any) => (
-                <tr key={item._id}>
+                <tr
+                  key={item._id}
+                  className="even:bg-gray-100 hover:bg-gray-200"
+                >
                   <td className="px-4 py-2 border">{item.filename}</td>
                   <td className="px-4 py-2 border">{item.grade.join(", ")}</td>
                   <td className="px-4 py-2 border">{item.subject}</td>
