@@ -51,7 +51,7 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-4 items-center">
             {user?.role === "teacher" ? (
               <Link
-                href="/"
+                href="/dashboard/teacher/assessment"
                 className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
               >
                 <ImPencil2 />
