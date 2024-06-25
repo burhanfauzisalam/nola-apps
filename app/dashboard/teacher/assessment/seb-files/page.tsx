@@ -6,6 +6,7 @@ import { IoMdOpen } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoMdCopy } from "react-icons/io";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const FileTable = () => {
   const [data, setData] = useState([]);
@@ -14,6 +15,7 @@ const FileTable = () => {
   const session: any = Cookies.get("token");
   const sessionParse = JSON.parse(session ? session : null);
   const token = sessionParse?.token;
+  const { push } = useRouter();
 
   useEffect(() => {
     const getData = async () => {
@@ -81,74 +83,107 @@ const FileTable = () => {
   };
 
   return (
-    data.length > 0 && (
-      <div className="container mx-auto px-4 py-5">
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 border">Filename</th>
-                <th className="px-4 py-2 border">Grade</th>
-                <th className="px-4 py-2 border">Subject</th>
-                <th className="px-4 py-2 border">Assessment</th>
-                <th className="px-4 py-2 border">Teacher</th>
-                <th className="px-4 py-2 border">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item: any) => (
-                <tr
-                  key={item._id}
-                  className="even:bg-gray-100 hover:bg-gray-200"
-                >
-                  <td className="px-4 py-2 border">{item.filename}</td>
-                  <td className="px-4 py-2 border">{item.grade.join(", ")}</td>
-                  <td className="px-4 py-2 border">{item.subject}</td>
-                  <td className="px-4 py-2 border">{item.assessment}</td>
-                  <td className="px-4 py-2 border">{item.teacher}</td>
-                  <td className="px-4 py-2 border">
-                    <div className="flex space-x-2">
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => handleOpen(item.url)}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Open"
-                      >
-                        <IoMdOpen />
-                      </button>
-                      <button
-                        className="btn btn-success"
-                        onClick={() => handleCopyClick(item.url)}
-                        disabled={loading}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Copy URL"
-                      >
-                        <IoMdCopy />
-                      </button>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => handleDelete(item.url)}
-                        disabled={loading}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Delete file"
-                      >
-                        <RiDeleteBin6Line />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {responseMessage && (
-            <p className="mt-4 text-center text-red-600">{responseMessage}</p>
-          )}
-        </div>
+    <>
+      <div className="container mx-auto px-4 pt-5">
+        <button
+          className="btn btn-primary"
+          onClick={() => push("/dashboard/teacher/assessment/upload-seb-file")}
+        >
+          Upload
+        </button>
+        <button
+          className="btn btn-secondary ml-2"
+          onClick={() =>
+            push(
+              "https://drive.usercontent.google.com/download?id=1Qsdw39kF6-2c7BS4J7K60Nn-YmXs1lwf&export=download&authuser=0&confirm=t&uuid=2f7209f0-5fdb-4a28-b939-06842437167f&at=APZUnTUuQ0l5hSa9vX-K8RYwe4aN:1719286445453"
+            )
+          }
+        >
+          Download SEB for Windows OS
+        </button>
+        <button
+          className="btn btn-secondary ml-2"
+          onClick={() =>
+            push(
+              "https://drive.usercontent.google.com/download?id=1mr15WtAWNfN-DT5ZcLfcmKJM6JESaJxj&export=download&authuser=0&confirm=t&uuid=67adcd72-ede4-49af-a1ee-0a2fe4a77256&at=APZUnTXtzLrlEBw_GNe3uNQzmb5o:1719286572400"
+            )
+          }
+        >
+          Download SEB for Mac OS
+        </button>
       </div>
-    )
+
+      {data.length > 0 && (
+        <div className="container mx-auto px-4 pb-5 pt-2">
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-300">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 border">Filename</th>
+                  <th className="px-4 py-2 border">Grade</th>
+                  <th className="px-4 py-2 border">Subject</th>
+                  <th className="px-4 py-2 border">Assessment</th>
+                  <th className="px-4 py-2 border">Teacher</th>
+                  <th className="px-4 py-2 border">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item: any) => (
+                  <tr
+                    key={item._id}
+                    className="even:bg-gray-100 hover:bg-gray-200"
+                  >
+                    <td className="px-4 py-2 border">{item.filename}</td>
+                    <td className="px-4 py-2 border">
+                      {item.grade.join(", ")}
+                    </td>
+                    <td className="px-4 py-2 border">{item.subject}</td>
+                    <td className="px-4 py-2 border">{item.assessment}</td>
+                    <td className="px-4 py-2 border">{item.teacher}</td>
+                    <td className="px-4 py-2 border">
+                      <div className="flex space-x-2">
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handleOpen(item.url)}
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Open"
+                        >
+                          <IoMdOpen />
+                        </button>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => handleCopyClick(item.url)}
+                          disabled={loading}
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Copy URL"
+                        >
+                          <IoMdCopy />
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleDelete(item.url)}
+                          disabled={loading}
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Delete file"
+                        >
+                          <RiDeleteBin6Line />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {responseMessage && (
+              <p className="mt-4 text-center text-red-600">{responseMessage}</p>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
