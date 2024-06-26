@@ -18,8 +18,6 @@ const FileTable = () => {
   const token = sessionParse?.token;
   const { push } = useRouter();
 
-  const sebAPIphp: any = process.env.NEXT_PUBLIC_API_PHP;
-
   useEffect(() => {
     const getData = async () => {
       try {
