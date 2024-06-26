@@ -23,8 +23,8 @@ const LoginPage = () => {
     try {
       const url: any =
         selectedRole === "student"
-          ? process.env.NEXT_PUBLIC_API_LOGIN_STUDENT
-          : process.env.NEXT_PUBLIC_API_LOGIN;
+          ? `${process.env.NEXT_PUBLIC_API_EX}/login-student`
+          : `${process.env.NEXT_PUBLIC_API_EX}/login`;
       const res = await axios.post(
         url,
         {
@@ -42,11 +42,11 @@ const LoginPage = () => {
     } catch (error: any) {
       if (error.response) {
         setError(error.response.data.message);
+        setLoading(false);
       } else {
         setError("An unexpected error occurred");
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
     }
   };
 

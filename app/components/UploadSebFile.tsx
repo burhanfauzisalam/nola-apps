@@ -64,12 +64,15 @@ const FileUploadForm = () => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", selectedFile);
-      const urlSebPhp: any = process.env.NEXT_PUBLIC_API_SEB_PHP;
-      const res = await axios.post(urlSebPhp, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_PHP}/upload.php`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (res.data.status === "success") {
         setResponseMessage(`File uploaded successfully`);
@@ -78,8 +81,10 @@ const FileUploadForm = () => {
         setSelectedFile(null);
 
         try {
-          const aksesUrl: any = process.env.NEXT_PUBLIC_API_TEACHER;
-          const teacherData = await axios.get(aksesUrl, { headers: { token } });
+          const teacherData = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_EX}/teacher`,
+            { headers: { token } }
+          );
           const filename = res.data.filename;
           const url = res.data.url;
           const grade = Object.keys(selectedGrades).filter(
@@ -90,10 +95,13 @@ const FileUploadForm = () => {
           const teacher = teacherData.data.name;
 
           const data = { filename, url, grade, subject, assessment, teacher };
-          const urlSeb: any = process.env.NEXT_PUBLIC_API_SEB;
-          const uploadToDB = await axios.post(urlSeb, data, {
-            headers: { token },
-          });
+          const uploadToDB = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_EX}/seb`,
+            data,
+            {
+              headers: { token },
+            }
+          );
           setUploadState(false);
           setLoading(false);
           push("/dashboard/teacher/assessment/seb-files");

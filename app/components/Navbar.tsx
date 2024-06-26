@@ -21,10 +21,10 @@ const Navbar = () => {
       try {
         const url: any =
           sessionParse.role === "teacher"
-            ? process.env.NEXT_PUBLIC_API_TEACHER
+            ? `${process.env.NEXT_PUBLIC_API_EX}/teacher`
             : sessionParse.role === "parent"
-            ? process.env.NEXT_PUBLIC_API_PARENT
-            : process.env.NEXT_PUBLIC_API_STUDENT;
+            ? `${process.env.NEXT_PUBLIC_API_EX}/parent`
+            : `${process.env.NEXT_PUBLIC_API_EX}/student`;
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
@@ -55,6 +55,14 @@ const Navbar = () => {
             {user?.role === "teacher" ? (
               <Link
                 href="/dashboard/teacher/assessment"
+                className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
+              >
+                <ImPencil2 />
+                <span className="ml-1">Assessment</span>
+              </Link>
+            ) : user?.role === "student" ? (
+              <Link
+                href="/dashboard/student/assessment"
                 className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
               >
                 <ImPencil2 />

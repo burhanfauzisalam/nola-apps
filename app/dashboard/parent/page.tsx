@@ -11,8 +11,10 @@ const ParentPage = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const url: any = process.env.NEXT_PUBLIC_API_PARENT;
-        const res = await axios.get(url, { headers: { token } });
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_EX}/parent`,
+          { headers: { token } }
+        );
         setUser(res.data);
       } catch (error: any) {
         console.log(error.response.message);

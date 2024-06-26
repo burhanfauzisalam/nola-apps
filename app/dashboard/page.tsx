@@ -17,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     const cekToken: any = async () => {
       try {
-        const url: any = process.env.NEXT_PUBLIC_API_DECODE;
+        const url: any = `${process.env.NEXT_PUBLIC_API_EX}/decode`;
         const res = await axios.post(url, {}, { headers: { token } });
         // console.log(res.data);
         setUser(res.data);

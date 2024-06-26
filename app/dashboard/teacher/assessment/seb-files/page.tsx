@@ -18,10 +18,12 @@ const FileTable = () => {
   const token = sessionParse?.token;
   const { push } = useRouter();
 
+  const sebAPIphp: any = process.env.NEXT_PUBLIC_API_PHP;
+
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(`https://api.nola.sch.id/api/seb`, {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_EX}/seb`, {
           headers: { token: token },
         });
         setData(res.data.reverse());
@@ -55,14 +57,14 @@ const FileTable = () => {
       formData.append("filename", urlFileName);
 
       const res = await axios.post(
-        "https://seb.nola.sch.id/delete.php",
+        `${process.env.NEXT_PUBLIC_API_PHP}/delete.php`,
         formData
       );
 
       if (res.data.status === "success") {
         setResponseMessage("File deleted successfully.");
         await axios.delete(
-          `https://api.nola.sch.id/api/seb?url=${urlFileName}`,
+          `${process.env.NEXT_PUBLIC_API_EX}/seb?url=${urlFileName}`,
           { headers: { token } }
         );
         setData((prevData) =>
