@@ -1,4 +1,5 @@
-"use client"; // components/Navbar.js atau components/Navbar.tsx
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
@@ -21,7 +22,9 @@ const Navbar = () => {
         const url: any =
           sessionParse.role === "teacher"
             ? process.env.NEXT_PUBLIC_API_TEACHER
-            : process.env.NEXT_PUBLIC_API_PARENT;
+            : sessionParse.role === "parent"
+            ? process.env.NEXT_PUBLIC_API_PARENT
+            : process.env.NEXT_PUBLIC_API_STUDENT;
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
@@ -59,7 +62,7 @@ const Navbar = () => {
               </Link>
             ) : user?.role === "parent" ? (
               <Link
-                href="/"
+                href="/dashboard/parent/invoice"
                 className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
               >
                 <ImPencil2 />
@@ -68,13 +71,23 @@ const Navbar = () => {
             ) : (
               ""
             )}
-            <Link
-              href="/about"
-              className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
-            >
-              <BsJournalBookmark />
-              <span className="ml-1">Report</span>
-            </Link>
+            {user?.role === "teacher" ? (
+              <Link
+                href="/dashboard/teacher/report"
+                className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
+              >
+                <BsJournalBookmark />
+                <span className="ml-1">Report</span>
+              </Link>
+            ) : (
+              <Link
+                href="/dashboard/parent/report"
+                className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
+              >
+                <BsJournalBookmark />
+                <span className="ml-1">Report</span>
+              </Link>
+            )}
             <div className="relative">
               <button
                 onClick={toggleDropdown}

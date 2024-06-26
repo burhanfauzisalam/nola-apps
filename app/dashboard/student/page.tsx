@@ -1,7 +1,7 @@
 import React from "react";
 
 const StudentPage = () => {
-  return;
+  return <h1>Student page</h1>;
 };
 
 export default StudentPage;

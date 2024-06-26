@@ -12,6 +12,7 @@ const FileTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const session: any = Cookies.get("token");
   const sessionParse = JSON.parse(session ? session : null);
   const token = sessionParse?.token;
@@ -29,9 +30,9 @@ const FileTable = () => {
       }
     };
     getData();
-  }, []);
+  }, [token]);
 
-  const handleCopyClick = (url: any) => {
+  const handleCopyClick = (url: string) => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
@@ -42,7 +43,7 @@ const FileTable = () => {
       });
   };
 
-  const handleDelete = async (urlFileName: any) => {
+  const handleDelete = async (urlFileName: string) => {
     if (!urlFileName) {
       alert("No file to delete");
       return;
@@ -78,9 +79,17 @@ const FileTable = () => {
     }
   };
 
-  const handleOpen = (url: any) => {
+  const handleOpen = (url: string) => {
     window.location.href = url;
   };
+
+  const handleSearchChange = (event: any) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredData = data.filter((item: any) =>
+    item.filename.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
@@ -113,10 +122,20 @@ const FileTable = () => {
         </button>
       </div>
 
-      {data.length > 0 && (
+      <div className="container mx-auto px-4 pt-4">
+        <input
+          type="text"
+          className="form-input mt-1 block form-control"
+          placeholder="&#x1F50D; Search by filename..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
+
+      {filteredData.length > 0 && (
         <div className="container mx-auto px-4 pb-5 pt-2">
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-300">
+            <table className="min-w-full bg-white border border-gray-100">
               <thead>
                 <tr>
                   <th className="px-4 py-2 border">Filename</th>
@@ -128,7 +147,7 @@ const FileTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item: any) => (
+                {filteredData.map((item: any) => (
                   <tr
                     key={item._id}
                     className="even:bg-gray-100 hover:bg-gray-200"
