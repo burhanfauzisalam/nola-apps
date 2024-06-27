@@ -21,10 +21,18 @@ const FileTable = () => {
   useEffect(() => {
     const getData = async () => {
       try {
+        const getUSer = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_EX}/teacher`,
+          { headers: { token } }
+        );
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_EX}/seb`, {
           headers: { token: token },
         });
-        setData(res.data.reverse());
+        const rawData = res.data.reverse();
+        const filteredDataByGrade = rawData
+          ? rawData.filter((item: any) => item.teacher === getUSer.data.name)
+          : rawData;
+        setData(filteredDataByGrade);
       } catch (error) {
         console.error("Gagal mengambil data:", error);
       }
