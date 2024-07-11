@@ -24,7 +24,9 @@ const AssignData = () => {
               {item}
             </button>
           ))}
-          <button className="btn btn-info">button</button>
+          <button className="btn px-4 py-2 bg-blue-500 text-white rounded mx-2 hover:bg-blue-600">
+            button
+          </button>
         </div>
       </div>
 
