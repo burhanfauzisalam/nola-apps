@@ -28,7 +28,7 @@ const Navbar = () => {
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
-        console.log(error?.response.message);
+        /* eslint-disable */ console.log(error?.response.message);
       }
     };
     getUser();
