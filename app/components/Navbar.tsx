@@ -28,7 +28,7 @@ const Navbar = () => {
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
-        console.log(error.response.message);
+        console.log(error?.response.message);
       }
     };
     getUser();
@@ -87,7 +87,7 @@ const Navbar = () => {
                 <BsJournalBookmark />
                 <span className="ml-1">Report</span>
               </Link>
-            ) : (
+            ) : user?.role === "parent" ? (
               <Link
                 href="/dashboard/parent/report"
                 className="text-gray-900 hover:text-gray-700 no-underline d-flex align-items-center"
@@ -95,7 +95,7 @@ const Navbar = () => {
                 <BsJournalBookmark />
                 <span className="ml-1">Report</span>
               </Link>
-            )}
+            ) : null}
             <div className="relative">
               <button
                 onClick={toggleDropdown}

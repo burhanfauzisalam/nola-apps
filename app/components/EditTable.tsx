@@ -94,23 +94,29 @@ const EditableTable: React.FC<editProps> = ({ id }) => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Editable Tables</h1>
 
-      <h2>Semester 1</h2>
-      <table>
+      <h2 className="pt-5">Semester 1</h2>
+      <table className="min-w-full bg-white border-collapse">
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Semester 1</th>
-            <th>Actions</th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Item
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Semester 1
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
           {data?.map((row: any, rowIndex: number) => (
             <tr key={row._id}>
-              <td>{row.item}</td>
-              <td>
+              <td className="border border-gray-300 px-4 py-2">{row.item}</td>
+              <td className="border border-gray-300 px-4 py-2">
                 {row.semester1.map((sem1Value: any, sem1Index: number) => (
                   <input
                     key={sem1Index}
@@ -129,7 +135,7 @@ const EditableTable: React.FC<editProps> = ({ id }) => {
                   />
                 ))}
               </td>
-              <td>
+              <td className="border border-gray-300 px-4 py-2">
                 {isEditing === rowIndex ? (
                   <button onClick={() => handleSave(rowIndex)}>Save</button>
                 ) : (
@@ -140,21 +146,26 @@ const EditableTable: React.FC<editProps> = ({ id }) => {
           ))}
         </tbody>
       </table>
-
-      <h2>Semester 2</h2>
-      <table>
+      <h2 className="pt-5">Semester 2</h2>
+      <table className="min-w-full bg-white border-collapse">
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Semester 2</th>
-            <th>Actions</th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Item
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Semester 2
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
           {data.map((row: any, rowIndex: number) => (
             <tr key={row._id}>
-              <td>{row.item}</td>
-              <td>
+              <td className="border border-gray-300 px-4 py-2">{row.item}</td>
+              <td className="border border-gray-300 px-4 py-2">
                 {row.semester2.map((sem2Value: any, sem2Index: number) => (
                   <input
                     key={sem2Index}
@@ -173,7 +184,7 @@ const EditableTable: React.FC<editProps> = ({ id }) => {
                   />
                 ))}
               </td>
-              <td>
+              <td className="border border-gray-300 px-4 py-2">
                 {isEditing === rowIndex ? (
                   <button onClick={() => handleSave(rowIndex)}>Save</button>
                 ) : (
