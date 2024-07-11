@@ -30,7 +30,7 @@ const InputPage = () => {
       }
     };
     getUser();
-  }, []);
+  }, [token]);
 
   const handleAY = (event: any) => {
     setAY(event.target.value);
