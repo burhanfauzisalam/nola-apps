@@ -21,7 +21,7 @@ const ParentPage = () => {
       }
     };
     getUser();
-  }, []);
+  }, [token]);
   return (
     <div className="mt-10">
       <h1>{user?.username}</h1>

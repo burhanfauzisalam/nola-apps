@@ -32,7 +32,7 @@ const Navbar = () => {
       }
     };
     getUser();
-  }, []);
+  }, [sessionParse, token]);
 
   const handleLogout = () => {
     Cookies.remove("token");

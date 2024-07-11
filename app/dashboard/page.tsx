@@ -35,6 +35,6 @@ export default function Dashboard() {
       }
     };
     cekToken();
-  }, []);
+  }, [token]);
   return;
 }

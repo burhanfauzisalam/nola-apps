@@ -32,7 +32,7 @@ const EditableTable: React.FC<editProps> = ({ id }) => {
       }
     };
     getData();
-  }, [id]);
+  }, [requestData]);
 
   // Handle edit
   const handleEdit = (index: number) => {
