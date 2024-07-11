@@ -18,15 +18,13 @@ const AssignData = () => {
           {paketA.map((item: any, index: any) => (
             <button
               key={index}
-              className="btn px-4 py-2 bg-blue-500 text-white rounded mx-2 hover:bg-blue-600"
+              className="btn btn-primary mx-2"
               onClick={() => push(`${url}/${item}`)}
             >
               {item}
             </button>
           ))}
-          <button className="btn px-4 py-2 bg-blue-500 text-white rounded mx-2 hover:bg-blue-600">
-            button
-          </button>
+          <button className="btn btn-primary mx-2">button</button>
         </div>
       </div>
 
@@ -40,7 +38,7 @@ const AssignData = () => {
           {paketB.map((item: any, index: any) => (
             <button
               key={index}
-              className="btn px-4 py-2 bg-yellow-500 text-white rounded mx-2 hover:bg-yellow-600"
+              className="btn btn-warning mx-2"
               onClick={() => push(`${url}/${item}`)}
             >
               {item}
@@ -59,21 +57,12 @@ const AssignData = () => {
           {paketC.map((item: any, index: any) => (
             <button
               key={index}
-              className="btn px-4 py-2 bg-green-500 text-white rounded mx-2 hover:bg-green-600"
+              className="btn btn-success mx-2"
               onClick={() => push(`${url}/${item}`)}
             >
               {item}
             </button>
           ))}
-          {/* <button className="btn px-4 py-2 bg-green-500 text-white rounded mx-2 hover:bg-green-600">
-            8
-          </button>
-          <button className="btn px-4 py-2 bg-green-500 text-white rounded mx-2 hover:bg-green-600">
-            7
-          </button>
-          <button className="btn px-4 py-2 bg-green-500 text-white rounded mx-2 hover:bg-green-600">
-            9
-          </button> */}
         </div>
       </div>
     </div>
