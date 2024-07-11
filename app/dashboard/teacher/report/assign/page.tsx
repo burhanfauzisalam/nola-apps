@@ -51,8 +51,9 @@ const AssignData = () => {
         <h3 className="text-2xl font-semibold mb-2">Paket C</h3>
         <span className="text-lg">Grade: </span>
         <div className="flex justify-center mt-2">
-          {paketC.map((item: any) => (
+          {paketC.map((item: any, index: any) => (
             <button
+              key={index}
               className="btn px-4 py-2 bg-green-500 text-white rounded mx-2 hover:bg-green-600"
               onClick={() => push(`${url}/${item}`)}
             >
