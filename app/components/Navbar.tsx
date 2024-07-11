@@ -9,6 +9,7 @@ import { ImPencil2 } from "react-icons/im";
 import { BsJournalBookmark } from "react-icons/bs";
 
 const Navbar = () => {
+  const [error, setError]: any = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -28,7 +29,7 @@ const Navbar = () => {
         const res = await axios.get(url, { headers: { token } });
         setUser(res.data);
       } catch (error: any) {
-        /* eslint-disable */ console.log(error?.response.message);
+        // setError(error?.response.message);
       }
     };
     getUser();
@@ -50,6 +51,7 @@ const Navbar = () => {
             <Link href="/" className="text-xl font-bold text-gray-900">
               <img src="/logo.png" width={100} alt="" />
             </Link>
+            <p>{error}</p>
           </div>
           <div className="hidden md:flex space-x-4 items-center">
             {user?.role === "teacher" ? (

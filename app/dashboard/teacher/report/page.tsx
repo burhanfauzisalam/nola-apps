@@ -21,7 +21,9 @@ const TeacherReportPage = () => {
           />
         </div>
         <div className="col-6 col-md-4">
-          <SmallResponsiveCard data={{ title: "Input Nilai", link: "#" }} />
+          <SmallResponsiveCard
+            data={{ title: "Kelas", link: `${url}/kelas` }}
+          />
         </div>
       </div>
     </>

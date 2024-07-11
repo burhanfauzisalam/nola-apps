@@ -24,7 +24,6 @@ const AssignData = () => {
               {item}
             </button>
           ))}
-          <button className="btn btn-primary mx-2">button</button>
         </div>
       </div>
 
