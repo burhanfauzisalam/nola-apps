@@ -26,7 +26,7 @@ const InputPage = () => {
         );
         setTeacher(res.data);
       } catch (error: any) {
-        console.log(error.response.message);
+        console.log(error?.response.message);
       }
     };
     getUser();
