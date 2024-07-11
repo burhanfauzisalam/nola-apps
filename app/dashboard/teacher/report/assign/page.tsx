@@ -15,8 +15,9 @@ const AssignData = () => {
         <h3 className="text-2xl font-semibold mb-2">Paket A</h3>
         <span className="text-lg">Grade: </span>
         <div className="flex justify-center mt-2">
-          {paketA.map((item: any) => (
+          {paketA.map((item: any, index: any) => (
             <button
+              key={index}
               className="btn px-4 py-2 bg-blue-500 text-white rounded mx-2 hover:bg-blue-600"
               onClick={() => push(`${url}/${item}`)}
             >
@@ -33,8 +34,9 @@ const AssignData = () => {
         <h3 className="text-2xl font-semibold mb-2">Paket B</h3>
         <span className="text-lg">Grade: </span>
         <div className="flex justify-center mt-2">
-          {paketB.map((item: any) => (
+          {paketB.map((item: any, index: any) => (
             <button
+              key={index}
               className="btn px-4 py-2 bg-yellow-500 text-white rounded mx-2 hover:bg-yellow-600"
               onClick={() => push(`${url}/${item}`)}
             >
