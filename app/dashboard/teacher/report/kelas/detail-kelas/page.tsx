@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 
@@ -22,19 +22,21 @@ const ClassDetailPage = () => {
   }, []);
   // console.log(data);
   return (
-    <div className="container mt-5">
-      <h1>Class Detail</h1>
-      <p>
-        <strong>Subject:</strong> {data?.subject}
-      </p>
-      <p>
-        <strong>Teacher:</strong> {data?.teacher}
-      </p>
-      <p>
-        <strong>School Year:</strong> {data?.schoolYear}
-      </p>
-      {/* Add more details or components to handle class details */}
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="container mt-5">
+        <h1>Class Detail</h1>
+        <p>
+          <strong>Subject:</strong> {data?.subject}
+        </p>
+        <p>
+          <strong>Teacher:</strong> {data?.teacher}
+        </p>
+        <p>
+          <strong>School Year:</strong> {data?.schoolYear}
+        </p>
+        {/* Add more details or components to handle class details */}
+      </div>
+    </Suspense>
   );
 };
 
