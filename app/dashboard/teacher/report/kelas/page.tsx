@@ -1,13 +1,15 @@
 "use client";
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BsPencilSquare } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { Modal, Button, Form } from "react-bootstrap";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const KelasPage = () => {
+  const { push } = useRouter();
   const [data, setData]: any = useState([]);
   const [filter, setFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -53,8 +55,10 @@ const KelasPage = () => {
     }
   }, []);
 
-  const handleEdit = (id: string) => {
-    console.log(`Edit item with id: ${id}`);
+  const handleEdit = (subject: string, teacher: string, schoolYear: string) => {
+    push(
+      `/dashboard/teacher/report/kelas/detail-kelas?subject=${subject}&teacher=${teacher}&schoolYear=${schoolYear}`
+    );
   };
 
   const handleDelete = async (id: string) => {
@@ -103,7 +107,8 @@ const KelasPage = () => {
     }
   };
 
-  const filteredData = data?.filter(
+  const filterData = data?.filter((item: any) => item.teacher === user?.name);
+  const filteredData = filterData.filter(
     (item: any) =>
       item.subject.toLowerCase().includes(filter.toLowerCase()) ||
       item.schoolYear.includes(filter) ||
@@ -147,7 +152,9 @@ const KelasPage = () => {
               <td>
                 <Button
                   className="btn btn-primary btn-sm me-2"
-                  onClick={() => handleEdit(item._id)}
+                  onClick={() =>
+                    handleEdit(item.subject, item.teacher, item.schoolYear)
+                  }
                 >
                   <BsPencilSquare />
                 </Button>
